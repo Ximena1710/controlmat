@@ -1,0 +1,83 @@
+<app-navbar></app-navbar>
+<div class="container mt-5">
+    <h1 class="text-center">Conciliación de Materiales</h1>
+    <form #conciliacionForm="ngForm" (ngSubmit)="guardarDatos(conciliacionForm)">
+        <table id="materialTable" class="table table-bordered">
+            <!-- Cabecera de la tabla -->
+            <thead>
+                <tr>
+                    <th>Numero de orden</th>
+                    <th>Lote</th>
+                    <th>Analisis</th>
+                    <th>Codigo</th>
+                    <th>producto</th>
+                    <th>Cantidad Recibida</th>
+                    <th>Alistamiento - Destruido</th>
+                    <th>Autorizaciones - Evidencias</th>
+                    <th>Muestras</th>
+                    <th>Rechazo</th>
+                    <th>Otras-Pruebas</th>
+                    <th>Consumo</th>
+                </tr>
+            </thead>
+            <!-- Cuerpo de la tabla -->
+            <tbody id="materialTableBody">
+                <tr *ngFor="let item of items; let i = index">
+                    <td><input type="text" class="form-control" name="numeroOrden{{i}}" [(ngModel)]="item.numeroOrden"></td>
+                    <td><input type="text" class="form-control" name="lote{{i}}" [(ngModel)]="item.lote"></td>
+                    <td><input type="text" class="form-control" name="analisis{{i}}" [(ngModel)]="item.analisis"></td>
+                    <td><input type="text" class="form-control" name="codigo{{i}}" [(ngModel)]="item.codigo"></td>
+                    <td><input type="text" class="form-control" name="producto{{i}}" [(ngModel)]="item.producto"></td>
+                    <td><input type="number" class="form-control" name="cantidadRecibida{{i}}" [(ngModel)]="item.cantidadRecibida" (input)="calcularTotales()"></td>
+                    <td><input type="number" class="form-control" name="alistamientoDestruido{{i}}" [(ngModel)]="item.alistamientoDestruido" (input)="calcularTotales()"></td>
+                    <td><input type="number" class="form-control" name="autorizacionesEvidencias{{i}}" [(ngModel)]="item.autorizacionesEvidencias" (input)="calcularTotales()"></td>
+                    <td><input type="number" class="form-control" name="muestras{{i}}" [(ngModel)]="item.muestras" (input)="calcularTotales()"></td>
+                    <td><input type="number" class="form-control" name="rechazo{{i}}" [(ngModel)]="item.rechazo" (input)="calcularTotales()"></td>
+                    <td><input type="number" class="form-control" name="otrasPruebas{{i}}" [(ngModel)]="item.otrasPruebas" (input)="calcularTotales()"></td>
+                    <td><input type="number" class="form-control" name="consumo{{i}}" [(ngModel)]="item.consumo" (input)="calcularTotales()"></td>
+                </tr>
+            </tbody>
+            <!-- Pie de la tabla -->
+            <tfoot>
+                <tr>
+                    <td colspan="10"></td>
+                    <td>Consumo Total</td>
+                    <td><input type="number" class="form-control" name="consumoTotalGeneral" [(ngModel)]="consumoTotalGeneral" readonly></td>
+                </tr>
+                <tr>
+                    <td colspan="10"></td>
+                    <td>Rechazo Total</td>
+                    <td><input type="number" class="form-control" name="rechazoTotalGeneral" [(ngModel)]="rechazoTotalGeneral" readonly></td>
+                </tr>
+                <tr>
+                    <td colspan="10"></td>
+                    <td>Devoluciones</td>
+                    <td><input type="number" class="form-control" name="devolucionesTotalGeneral" [(ngModel)]="devolucionesTotalGeneral" readonly></td>
+                </tr>
+            </tfoot>
+        </table>
+        <!-- Historial de Conciliaciones -->
+        <div>
+            <h3>Historial de Conciliaciones</h3>
+            <table id="historialTable" class="table">
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Consumo Total</th>
+                        <th>Rechazo Total</th>
+                        <th>Devoluciones</th>
+                    </tr>
+                </thead>
+                <tbody id="historialTableBody">
+                    <tr *ngFor="let historial of historial">
+                        <td>{{ historial.fecha }}</td>
+                        <td>{{ historial.consumoTotal }}</td>
+                        <td>{{ historial.rechazoTotal }}</td>
+                        <td>{{ historial.devoluciones }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <button type="submit" class="btn btn-success">Guardar</button>
+    </form>
+</div>

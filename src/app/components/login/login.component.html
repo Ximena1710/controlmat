@@ -1,0 +1,29 @@
+<div class="container">
+    <div class="card">
+        <div class="text-center mb-4">
+            <img src="assets/controlmat.png" alt="Controlmat Logo" class="img-fluid">
+        </div>
+        <h5 class="mb-2" style="text-align:center">Inicio de sesión</h5>
+        <p>Inicia sesión con tu documento de identidad</p>
+        <form (ngSubmit)="onSubmit()">
+            <div class="mb-3 position-relative">
+                <label for="username" class="form-label">Identificación</label>
+                <i class="fas fa-user input-icon position-absolute" style="left: 10px; top: 38px;"></i>
+                <input type="text" id="username" [(ngModel)]="username" name="username" class="form-control ps-5" placeholder="Introduce tu numero de identificación" required>
+            </div>
+            <div class="mb-3 position-relative">
+                <label for="password" class="form-label">Contraseña</label>
+                <i class="fas fa-key input-icon position-absolute" style="left: 10px; top: 38px;"></i>
+                <input type="password" id="password" [(ngModel)]="password" name="password" class="form-control ps-5" placeholder="Introduce tu contraseña" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+        </form>
+        <div id="responseData" class="text-center mt-3 text-danger">{{ responseData }}</div>
+        <div class="text-center mt-3">
+            <a [routerLink]="['/recuperarContrasena']">Recuperar contraseña</a>
+        </div>
+        <div class="text-center mt-1">
+            <a [routerLink]="['/registro']">¿No tienes cuenta? Regístrate</a>
+        </div>
+    </div>
+</div>

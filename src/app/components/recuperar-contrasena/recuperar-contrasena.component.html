@@ -1,0 +1,59 @@
+<div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="card p-3" style="width: 100%; max-width: 500px;">
+        <div class="d-flex align-items-center mb-3">
+            <button class="btn btn-outline-primary me-2" (click)="goBack()">
+                <i class="bi bi-arrow-left"></i>
+            </button>
+            <h5 class="mb-0 text-center flex-grow-1">Recuperación de Contraseña</h5>
+        </div>
+        <div class="text-center mb-3">
+            <img src="assets/controlmat.png" alt="Controlmat Logo" style="max-width: 300px;">
+        </div>
+        <form [formGroup]="recoveryForm" (ngSubmit)="onSubmit()">
+            <div class="mb-2 position-relative">
+                <label for="identificacion" class="form-label">Identificación</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-card-text"></i></span>
+                    <input type="text" id="identificacion" formControlName="identificacion" class="form-control" placeholder="Identificación" required>
+                </div>
+            </div>
+            <div class="mb-2 position-relative">
+                <label for="securityQuestion" class="form-label">Método de recuperación de contraseña</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-question-circle"></i></span>
+                    <select id="securityQuestion" formControlName="securityQuestion" class="form-control" required>
+                        <option value="" disabled selected>Preguntas de seguridad</option>
+                        <option value="document-issue-date">Fecha de expedición del documento</option>
+                        <option value="pet-name">Nombre de una mascota</option>
+                        <option value="relative-name">Nombre de un familiar</option>
+                    </select>
+                </div>
+            </div>
+            <div class="mb-2 position-relative">
+                <label for="securityAnswer" class="form-label">Respuesta</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-pencil"></i></span>
+                    <input type="text" id="securityAnswer" formControlName="securityAnswer" class="form-control" placeholder="Respuesta" required>
+                </div>
+            </div>
+            <div *ngIf="showNewPasswordFields">
+                <div class="mb-2 position-relative">
+                    <label for="newPassword" class="form-label">Nueva Contraseña</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                        <input type="password" id="newPassword" formControlName="newPassword" class="form-control" placeholder="Nueva Contraseña" required>
+                    </div>
+                </div>
+                <div class="mb-2 position-relative">
+                    <label for="confirmNewPassword" class="form-label">Confirmar Nueva Contraseña</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                        <input type="password" id="confirmNewPassword" formControlName="confirmNewPassword" class="form-control" placeholder="Confirmar Nueva Contraseña" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Guardar</button>
+            </div>
+            <button *ngIf="!showNewPasswordFields" type="button" class="btn btn-primary w-100" (click)="validateAnswer()">Validar Respuesta</button>
+        </form>
+    </div>
+</div>

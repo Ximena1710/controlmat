@@ -1,0 +1,36 @@
+<app-navbar></app-navbar>
+<div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="card p-3" style="width: 100%; max-width: 700px;">
+        <h5 class="mb-3 text-center">Generar Reporte</h5>
+        <form [formGroup]="reportForm" (ngSubmit)="generateReport()">
+            <div class="mb-2 position-relative">
+                <label for="reportType" class="form-label">Escoja el reporte que desea generar</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-question-circle"></i></span>
+                    <select id="reportType" formControlName="reportType" class="form-control" required>
+                        <option value="" disabled selected>Escoja una opción</option>
+                        <option value="document-issue-date">Inventario</option>
+                        <option value="pet-name">Reporte consumo</option>
+                    </select>
+                </div>
+            </div>
+            <div class="mb-2 position-relative">
+                <label for="startDate" class="form-label">Desde</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-calendar"></i></span>
+                    <input type="date" id="startDate" formControlName="startDate" class="form-control" required>
+                </div>
+            </div>
+            <div class="mb-2 position-relative">
+                <label for="endDate" class="form-label">Hasta</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-calendar"></i></span>
+                    <input type="date" id="endDate" formControlName="endDate" class="form-control" required>
+                </div>
+            </div>
+            <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-primary">Generar Reporte</button>
+            </div>
+        </form>
+    </div>
+</div>

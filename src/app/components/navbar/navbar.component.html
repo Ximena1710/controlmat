@@ -1,0 +1,29 @@
+<nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <img src="/assets/controlmat.png" width="120" height="50" alt="">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" [routerLink]="['/home']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Insumos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [routerLink]="['/consumo']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Consumos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [routerLink]="['/conciliacion']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Conciliacion</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [routerLink]="['/asignacionRol']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Asignación de Roles</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [routerLink]="['/reportes']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Reportes</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
