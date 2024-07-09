@@ -5,7 +5,7 @@ import { NgForm } from '@angular/forms';
 @Component({
   selector: 'app-conciliacion',
   templateUrl: './conciliacion.component.html',
-  styleUrls: ['./conciliacion.component.css']
+  styleUrls: ['./conciliacion.component.css'] 
 })
 export class ConciliacionComponent {
   items: any[] = [
