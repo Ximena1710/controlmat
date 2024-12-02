@@ -1,19 +1,19 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-//import { PersonasDTO } from './personas-dto.model'; // Define este modelo según tu PersonasDTO en el backend
+import { PersonaDTO } from 'src/app/model/PersonaDTO';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PersonaService {
 
-  private apiUrl = 'http://tu-dominio.com/registrar'; // Reemplaza con tu URL real
+  private apiUrl = 'https://controlmat-ms.onrender.com/v1/usuario/registrar';
 
   constructor(private http: HttpClient) { }
 
-  addPersona(persona: PersonasDTO): Observable<PersonasDTO> {
+  addPersona(persona: PersonaDTO): Observable<PersonaDTO> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post<PersonasDTO>(this.apiUrl, persona, { headers });
+    return this.http.post<PersonaDTO>(this.apiUrl, persona, { headers });
   }
 }
