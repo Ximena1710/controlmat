@@ -17,7 +17,7 @@ interface Material {
 })
 export class MaterialInsumoService {
 
-  private baseUrl = 'http://localhost:8080/v1/material';
+  private baseUrl = 'https://controlmat-ms.onrender.com/v1/material';
 
   constructor(private http: HttpClient) { }
 

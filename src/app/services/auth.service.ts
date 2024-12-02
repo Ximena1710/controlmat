@@ -7,7 +7,7 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:8080/v1';
+  private apiUrl = 'https://controlmat-ms.onrender.com/v1';
   constructor(private http: HttpClient) {}
 
   login(credenciales: { usuario: string; clave: string }): Observable<any> {
