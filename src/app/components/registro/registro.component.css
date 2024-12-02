@@ -3,8 +3,17 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
     margin: 0;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    /* Permite que el contenedor ocupe toda la altura */
+    width: 100%;
 }
 
 .card {
@@ -15,6 +24,12 @@ body {
     border-radius: 10px;
     background: #FFF9F9;
     position: relative;
+    max-height: 90vh;
+    /* Limita la altura de la tarjeta al 90% del viewport */
+    overflow-y: auto;
+    /* Activa scroll interno si el contenido sobrepasa la altura */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    /* Añade un sombreado elegante */
 }
 
 .card h5 {
@@ -37,6 +52,8 @@ body {
     border: 3px solid #276F86;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 10px;
+    background: #FFF;
+    color: #000;
 }
 
 .form-control::placeholder {
@@ -62,4 +79,14 @@ body {
     font-weight: 400;
     font-size: 14px;
     color: #000000;
+}
+
+
+/* Ajustes responsivos */
+
+@media (max-height: 600px) {
+    .card {
+        max-height: 80vh;
+        /* Reduce la altura máxima en pantallas más pequeñas */
+    }
 }
