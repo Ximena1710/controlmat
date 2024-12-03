@@ -65,6 +65,7 @@ export class RegistroComponent {
       numero_documento: this.registrationForm.get('identificacion')?.value,
       telefono: this.registrationForm.get('telefono')?.value,
       email: this.registrationForm.get('correoElectronico')?.value,
+      clave: this.registrationForm.get('password')?.value,
       fecha_creacion: new Date().toISOString(),
       fecha_vinculacion: new Date().toISOString()
     };

@@ -7,6 +7,7 @@ export interface PersonaDTO {
     numero_documento: string;
     telefono: number;
     email: string;
+    clave: string;
     fecha_creacion: string;
     fecha_vinculacion: string;
   }
