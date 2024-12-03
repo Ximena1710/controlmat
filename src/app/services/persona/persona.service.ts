@@ -14,6 +14,10 @@ export class PersonaService {
 
   addPersona(persona: PersonaDTO): Observable<PersonaDTO> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post<PersonaDTO>(this.apiUrl, persona, { headers });
+    const options = {
+      headers,
+      withCredentials: true
+    };
+    return this.http.post<PersonaDTO>(this.apiUrl, persona, options);
   }
 }
