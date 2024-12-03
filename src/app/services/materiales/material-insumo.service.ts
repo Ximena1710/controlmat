@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 interface Material {
   id_material: number;
@@ -21,15 +20,21 @@ export class MaterialInsumoService {
 
   constructor(private http: HttpClient) { }
 
+  // Método para obtener todos los materiales
   findAll(): Observable<Material[]> {
-    return this.http.get<Material[]>(`${this.baseUrl}/find`);
+    const options = { withCredentials: true };
+    return this.http.get<Material[]>(`${this.baseUrl}/find`, options);
   }
 
+  // Método para guardar o actualizar un material
   saveAndUpdate(material: Material): Observable<string> {
-    return this.http.post<string>(`${this.baseUrl}/save`, material);
+    const options = { withCredentials: true };
+    return this.http.post<string>(`${this.baseUrl}/save`, material, options);
   }
 
+  // Método para eliminar un material
   delete(material: Material): Observable<string> {
-    return this.http.delete<string>(`${this.baseUrl}/delete`, { body: material });
+    const options = { withCredentials: true };
+    return this.http.delete<string>(`${this.baseUrl}/delete`, { body: material, ...options });
   }
 }
