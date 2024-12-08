@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { saveAs } from 'file-saver'; // Librería para descargar archivos
+import { RegistroConsumoService } from 'src/app/services/consumo/registro-consumo.service';
+import { MaterialInsumoService } from '../../services/materiales/material-insumo.service';
 
 @Component({
   selector: 'app-reportes',
@@ -9,7 +12,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class ReportesComponent {
   reportForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder, 
+    private reportesService: RegistroConsumoService, 
+    private materialInsumoService: MaterialInsumoService
+  ) {
     this.reportForm = this.fb.group({
       reportType: ['', Validators.required],
       startDate: ['', Validators.required],
@@ -24,26 +31,53 @@ export class ReportesComponent {
 
     const { reportType, startDate, endDate } = this.reportForm.value;
 
-    const reportNames: { [key: string]: string } = {
-      '':'',
-      'document-issue-date': 'Inventario',
-      'pet-name': 'Reporte consumo'
-    };
+    // Formatear las fechas para el formato adecuado
+    const formattedStartDate = new Date(startDate).toISOString();
+    const formattedEndDate = new Date(endDate).toISOString();
 
-    const reportName = reportNames[reportType];
+    if (reportType === 'document-issue-date') {
+      // Llama al servicio de Inventario con las fechas
+      this.materialInsumoService.findAll().subscribe(
+        (materials) => {
+          const csvData = this.convertToCSV(materials);
+          this.downloadFile(csvData, 'Inventario', 'csv');
+        },
+        (error) => {
+          console.error('Error al generar el reporte de inventario:', error);
+        }
+      );
+    } else if (reportType === 'pet-name') {
+      // Llama al servicio de Consumo con las fechas
+      this.reportesService.getConsumos().subscribe(
+        (consumos) => {
+         // const reportData = JSON.stringify(consumos, null, 2); 
+         const reportData = this.convertToCSV(consumos);
+          this.downloadFile(reportData, 'Reporte_Consumo', 'txt');
+        },
+        (error) => {
+          console.error('Error al generar el reporte de consumo:', error);
+        }
+      );
+    }
+  }
 
-    const reportData = `Report Type: ${reportName}\nStart Date: ${startDate}\nEnd Date: ${endDate}`;
+  // Convierte el arreglo de objetos a CSV
+  private convertToCSV(data: any[]): string {
+    if (!data || data.length === 0) {
+      return '';
+    }
 
-    const blob = new Blob([reportData], { type: 'text/plain' });
-    const url = window.URL.createObjectURL(blob);
+    const headers = Object.keys(data[0]).join(','); // Genera las cabeceras del CSV
+    const rows = data
+      .map((item) => Object.values(item).join(',')) // Genera las filas
+      .join('\n');
 
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `${reportName}.txt`;
-    document.body.appendChild(a);
-    a.click();
+    return `${headers}\n${rows}`;
+  }
 
-    document.body.removeChild(a);
-    window.URL.revokeObjectURL(url);
+  // Descarga el archivo con los datos proporcionados
+  private downloadFile(data: string, filename: string, extension: string) {
+    const blob = new Blob([data], { type: extension === 'csv' ? 'text/csv' : 'text/plain' });
+    saveAs(blob, `${filename}.${extension}`);
   }
 }

@@ -19,9 +19,8 @@ export class LoginComponent {
       usuario: this.username,
       clave: this.password
     };
-    this.router.navigate(['/home']);
 
-   /* this.authService.login(credenciales).subscribe(
+    this.authService.login(credenciales).subscribe(
       (data: any) => {
         if (data == 0) {
           this.responseData = 'Usuario y/o contraseña incorrecto ';
@@ -32,6 +31,6 @@ export class LoginComponent {
       error => {
         this.responseData = error;
       }
-    );*/
+    );
   }
 }

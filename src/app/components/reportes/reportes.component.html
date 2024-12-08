@@ -3,33 +3,51 @@
     <div class="card p-3" style="width: 100%; max-width: 700px;">
         <h5 class="mb-3 text-center">Generar Reporte</h5>
         <form [formGroup]="reportForm" (ngSubmit)="generateReport()">
+            <!-- Tipo de Reporte -->
             <div class="mb-2 position-relative">
                 <label for="reportType" class="form-label">Escoja el reporte que desea generar</label>
                 <div class="input-group">
                     <span class="input-group-text"><i class="bi bi-question-circle"></i></span>
-                    <select id="reportType" formControlName="reportType" class="form-control" required>
+                    <select id="reportType" formControlName="reportType" class="form-control" [ngClass]="{ 'is-invalid': reportForm.get('reportType')?.invalid && reportForm.get('reportType')?.touched }">
                         <option value="" disabled selected>Escoja una opción</option>
                         <option value="document-issue-date">Inventario</option>
                         <option value="pet-name">Reporte consumo</option>
                     </select>
+                    <div class="invalid-feedback">
+                        Por favor, seleccione un tipo de reporte.
+                    </div>
                 </div>
             </div>
+
+            <!-- Fecha Desde -->
             <div class="mb-2 position-relative">
                 <label for="startDate" class="form-label">Desde</label>
                 <div class="input-group">
                     <span class="input-group-text"><i class="bi bi-calendar"></i></span>
-                    <input type="date" id="startDate" formControlName="startDate" class="form-control" required>
+                    <input type="date" id="startDate" formControlName="startDate" class="form-control" [ngClass]="{ 'is-invalid': reportForm.get('startDate')?.invalid && reportForm.get('startDate')?.touched }" />
+                    <div class="invalid-feedback">
+                        Por favor, ingrese una fecha de inicio.
+                    </div>
                 </div>
             </div>
+
+            <!-- Fecha Hasta -->
             <div class="mb-2 position-relative">
                 <label for="endDate" class="form-label">Hasta</label>
                 <div class="input-group">
                     <span class="input-group-text"><i class="bi bi-calendar"></i></span>
-                    <input type="date" id="endDate" formControlName="endDate" class="form-control" required>
+                    <input type="date" id="endDate" formControlName="endDate" class="form-control" [ngClass]="{ 'is-invalid': reportForm.get('endDate')?.invalid && reportForm.get('endDate')?.touched }" />
+                    <div class="invalid-feedback">
+                        Por favor, ingrese una fecha final.
+                    </div>
                 </div>
             </div>
+
+            <!-- Botón -->
             <div class="d-flex justify-content-center">
-                <button type="submit" class="btn btn-primary">Generar Reporte</button>
+                <button type="submit" class="btn btn-primary" [disabled]="reportForm.invalid">
+                    Generar Reporte.
+                </button>
             </div>
         </form>
     </div>

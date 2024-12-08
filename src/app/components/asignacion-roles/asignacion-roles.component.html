@@ -43,16 +43,16 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let role of rolesData">
-                        <td>{{ role.numeroDocumento }}</td>
-                        <td>{{ role.idUsuario }}</td>
-                        <td>{{ role.rol }}</td>
-                        <td>{{ role.fechaAsignacion }}</td>
+                        <td>{{ role.persona.numeroDocumento }}</td>
+                        <td>{{ role.id_usuario }}</td>
+                        <td>{{ role.rol.rolDescripcion }}</td>
+                        <td>{{ formatFecha(role.fecha_modificacion) }}</td>
                         <td>
                             <button class="btn btn-primary btn-sm me-2" (click)="editRole(role.idUsuario)">
-                                <i class="bi bi-pencil-fill"></i>
+                            <i class="bi bi-pencil-fill"></i>
                             </button>
                             <button class="btn btn-danger btn-sm" (click)="deleteRole(role.idUsuario)">
-                                <i class="bi bi-trash-fill"></i>
+                            <i class="bi bi-trash-fill"></i>
                             </button>
                         </td>
                     </tr>
