@@ -7,7 +7,7 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'https://controlmat-ms.onrender.com/v1';
+  private apiUrl = 'https://controlmat-ms.onrender.com/v1/usuario';
   
   constructor(private http: HttpClient) {}
 
