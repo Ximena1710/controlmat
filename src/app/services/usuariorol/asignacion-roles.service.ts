@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class AsignacionRolesService {
-  private apiUrl = 'http://localhost:8080/v1/usuariorol'; // Cambia esto por tu URL base
+  private apiUrl = 'https://controlmat-ms.onrender.com/v1/usuariorol'; // Cambia esto por tu URL base
 
   constructor(private http: HttpClient) {}
 
